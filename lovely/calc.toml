@@ -1,0 +1,76 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+    # Ice Cream
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.extra.chips - self.ability.extra.chip_mod <= 0 then "
+position = "at"
+payload = '''if self.ability.extra.chips - self.ability.extra.chip_mod <= 0 then 
+    G.GAME.pool_flags.ice_cream_eaten = true
+    check_for_unlock({type = 'upgradedfood_destroy_joker'})'''
+match_indent = true
+times = 1
+
+    # Turtle Bean
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.extra.h_size - self.ability.extra.h_mod <= 0 then"
+position = "at"
+payload = '''if self.ability.extra.h_size - self.ability.extra.h_mod <= 0 then
+    G.GAME.pool_flags.turtle_bean_eaten = true
+    check_for_unlock({type = 'upgradedfood_destroy_joker'})'''
+match_indent = true
+times = 1
+
+    # Popcorn
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.mult - self.ability.extra <= 0 then"
+position = "at"
+payload = '''if self.ability.mult - self.ability.extra <= 0 then 
+    G.GAME.pool_flags.popcorn_eaten = true
+    check_for_unlock({type = 'upgradedfood_destroy_joker'})'''
+match_indent = true
+times = 1
+
+    # Ramen
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.x_mult - self.ability.extra <= 1 then"
+position = "at"
+payload = '''if self.ability.x_mult - self.ability.extra <= 1 then
+    G.GAME.pool_flags.ramen_eaten = true
+    check_for_unlock({type = 'upgradedfood_destroy_joker'})'''
+match_indent = true
+times = 1
+
+    # Seltzer
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.extra - 1 <= 0 then "
+position = "at"
+payload = '''if self.ability.extra - 1 <= 0 then 
+    G.GAME.pool_flags.seltzer_drank = true
+    check_for_unlock({type = 'upgradedfood_destroy_joker'})'''
+match_indent = true
+times = 1
+
+    # Cavendish
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true end"
+position = "at"
+payload = '''
+if self.ability.name == 'Gros Michel' then G.GAME.pool_flags.gros_michel_extinct = true
+elseif self.ability.name == 'Cavendish' then G.GAME.pool_flags.cavendish_extinct = true check_for_unlock({type = 'upgradedfood_destroy_joker'}) end'''
+match_indent = true
+times = 1
